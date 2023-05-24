@@ -1,4 +1,4 @@
-To generate the horizontal bar plot, after cloning the repo, perform the following operations:
+To generate the horizontal bar plot, after cloning the repo, perform the following operations (For location of the files used, please contact @kxk302):
 
 1. Create a folder called 'new_onto_old'. For each species and each chromosome, copy the file that specifies which section of the T2T sequence maps to an existing (non-T2T) sequence. These are the aligned-intervals files. They are three-column files with each line being <chromosome_name> <start> <end>, where the interval is origin-zero half-open; there should not be any overlapping intervals. For example, copy the following files to 'new_onto_old' folder:
 
