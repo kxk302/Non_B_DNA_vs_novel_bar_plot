@@ -68,21 +68,16 @@ data/chrom_to_density.dat
 - this maps from the name of the individual to the base name of the corresponding density file
   E.g., mGorGor1.chrX Gorilla_gorilla_chrX
 
-# Controls -- choose one or the other of each setting
+5. In the 'scripts' folder, there is an R script that generates a bar plot. The script takes 6 input parameters:
 
-plotFilenameTemplate = "temp/new_onto_old.pdf"
- --OR--
-plotFilenameTemplate = NULL    # indicates that we draw to a window
+First argument: inhibitAlignmentFill = T/F
+Second argument: inhibitDensityFill = T/F
+Third argument: useSubsetOfSpecies = T/F. If F, will plot the horizontal bar for species we have no T2T info on
+                                          If T, those species are excluded from the bar plot  
+Forth argument: plotFilenameTemplate = NULL: will plot using quartz (Only works on Mac)
+                                      Or, plot file name. E.g., plots/STR_new_onto_old.pdf (Need to create a 'plots' folder)
+Fifth argument: non_B_DNA_Type. Allowed values: GQ MR STR APR IR DR Z.
+Sixth argument: non_B_DNA_Folder. E.g., './non_b/STR' for STR non-B DNA type
 
-inhibitAlignmentFill = T
- --OR--
-inhibitAlignmentFill = F
-
-inhibitDensityFill = T
- --OR--
-inhibitDensityFill = F
-
-useSubsetOfSpecies = T
- --OR--
-useSubsetOfSpecies = F
+6. In the 'scripts' folder, there is a shell script that call the R script for all non-B DNA types and generates their bar plot in 'plots' folder
 
