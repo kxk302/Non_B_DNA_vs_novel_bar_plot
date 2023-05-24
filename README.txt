@@ -51,27 +51,22 @@ Symphalangus_syndactylus_chrY_APR_density_final.bed
 4. The 'data' folder has the following files. Their description is given below.
 
 data/dip.20221111.lengths (OR data/subset.lengths)
-	- list of <chromosome_name> <length>, one per line
-	- chromosome_name should contain the name of the individual as a prefix,
-	  e.g. chm13 or mPanTro3; so for example something like chm13.chrX or
-	  mPanTro3.chrY
-	- order in this file determines order that bars are plotted
+- list of <chromosome_name> <length>, one per line
+- chromosome_name should contain the name of the individual as a prefix
+  E.g., chm13 or mPanTro3. So, for example something like chm13.chrX or mPanTro3.chrY
+- order in this file determines order that bars are plotted
 
 data/chrom_to_alignment.dat
-	- list of <chromosome_name> <alignment_name>, one per line
-	- this maps from the name of the individual to the base name of the
-	  corresponding aligned-intervals file; e.g.
-	    mGorGor1.chrX gorGor.chrX
-	- if a particular <chromosome_name> doesn't exist in this file, it's
-	  aligned-intervals bar is drawn as being all novel sequence
-	- chm13.chrX and hg002.chrY are hard-wired special cases for which the
-	  aligned-intervals bar is drawn as being all pre-existing sequence
+- list of <chromosome_name> <alignment_name>, one per line
+- this maps from the name of the individual to the base name of the corresponding aligned-intervals file
+  E.g., mGorGor1.chrX gorGor.chrX
+- if a particular <chromosome_name> doesn't exist in this file, it's aligned-intervals bar is drawn as being all novel sequence
+- chm13.chrX and hg002.chrY are hard-wired special cases for which the aligned-intervals bar is drawn as being all pre-existing sequence
 
 data/chrom_to_density.dat
-	- list of <chromosome_name> <density_name>, one per line
-	- this maps from the name of the individual to the base name of the
-	  corresponding density file; e.g.
-	   mGorGor1.chrX Gorilla_gorilla_chrX
+- list of <chromosome_name> <density_name>, one per line
+- this maps from the name of the individual to the base name of the corresponding density file
+  E.g., mGorGor1.chrX Gorilla_gorilla_chrX
 
 # Controls -- choose one or the other of each setting
 
