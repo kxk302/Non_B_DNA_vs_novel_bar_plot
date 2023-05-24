@@ -146,7 +146,7 @@ for (chromIx in 1:length(chromToLength))
 	if (inhibitAlignmentFill)
 		next
 
-        chromFilename = paste("results/",chromToAlignment[chromName],".new_onto_old.winnowmap.covered.dat.gz",sep="")
+        chromFilename = paste("new_onto_old/",chromToAlignment[chromName],".new_onto_old.winnowmap.covered.dat.gz",sep="")
         coveredIntervals = read.table(chromFilename,header=F,comment.ch="",colClasses=c("character","integer","integer"))
 
 	print(paste("filling ",chromName,", ",nrow(coveredIntervals)," intervals",sep=""))
