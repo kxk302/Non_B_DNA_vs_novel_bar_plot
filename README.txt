@@ -75,7 +75,7 @@ Second argument: inhibitDensityFill = T/F
 Third argument: useSubsetOfSpecies = T/F. If F, will plot the horizontal bar for species we have no T2T info on
                                           If T, those species are excluded from the bar plot  
 Forth argument: plotFilenameTemplate = NULL: will plot using quartz (Only works on Mac)
-                                      Or, plot file name. E.g., plots/STR_new_onto_old.pdf (Need to create a 'plots' folder)
+                                       Or, plot file name. E.g., plots/STR_new_onto_old.pdf (Need to create a 'plots' folder)
 Fifth argument: non_B_DNA_Type. Allowed values: GQ MR STR APR IR DR Z.
 Sixth argument: non_B_DNA_Folder. E.g., './non_b/STR' for STR non-B DNA type
 
