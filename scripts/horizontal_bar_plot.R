@@ -44,7 +44,10 @@ names(chromToLength) <- chromLengths[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 maxLength = max(chromToLength)
 
-#~~~~~
+chromToPlotLabelXXX = read.table("data/chrom_to_plot_label.dat",header=F,comment.ch="",colClasses=c("character","character"))
+chromToPlotLabel = chromToPlotLabelXXX[,2]
+names(chromToPlotLabel) <- chromToPlotLabelXXX[,1]
+# ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 
 plotFilename = NULL
 if (!is.null(plotFilenameTemplate))
@@ -93,7 +96,7 @@ for (chromIx in 1:length(chromToLength))
 	chromName = names(chromToLength)[chromIx]
 	bars[2*chromIx-1] = chromToLength[chromIx]
 	bars[2*chromIx  ] = chromToLength[chromIx]
-	names(bars)[2*chromIx-1] = paste(chromName," novel",sep="")
+	names(bars)[2*chromIx-1] = paste(chromToPlotLabel[chromName]," novel",sep="")
 	names(bars)[2*chromIx  ] = non_B_DNA_Type
 	barSpacing[2*chromIx-1] = 1.0
 	barSpacing[2*chromIx  ] = barSeparation
@@ -108,7 +111,7 @@ for (chromIx in 1:length(chromToLength))
 # par(mar=...) determines what portion of the plot window is reserved for margins
 # BLTR means bottom left top right
 options(scipen=10)
-par(mar=c(6.6,9.6,1.1,0.2)+0.1)    # BLTR
+par(mar=c(8,16,6,4)+0.1)    # BLTR
 
 # this call to barplot establishes the coordinate system in the plot area
 # and it draws bars, axes, and labels; barPos is a vector that gives the y

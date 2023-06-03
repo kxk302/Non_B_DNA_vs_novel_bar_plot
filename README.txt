@@ -68,6 +68,11 @@ data/chrom_to_density.dat
 - this maps from the name of the individual to the base name of the corresponding density file
   E.g., mGorGor1.chrX Gorilla_gorilla_chrX
 
+data/chrom_to_plot_label.dat
+- list of <chromosome_name> <plot_label>, one per line
+- this maps from the name of the individual to the plot label in horizontal bar plot for novel sequence 
+  E.g., mGorGor1.chrX Gorilla_chrX
+ 
 5. In the 'scripts' folder, there is an R script that generates a bar plot. The script takes 6 input parameters:
 
 First argument: inhibitAlignmentFill = T/F
