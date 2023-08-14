@@ -6,6 +6,8 @@ if (length(args) < 6) {
   stop("Specify inhibitAlignmentFill, inhibitDensityFill, useSubsetOfSpecies, plotFilenameTemplate, non-B DNA type, and non-B DNA folder", call.=FALSE)
 } 
 
+library(svglite)
+
 #inhibitAlignmentFill = T
 inhibitAlignmentFill = args[1]
 
@@ -61,21 +63,21 @@ turnDeviceOff = F
 if (useSubsetOfSpecies) height = height*(8/12)*(57/61) # 57/61 is a fudge factor
 
 # quartz() opens a drawing window; may not work on non-macs
-# otherwise we open a pdf file to draw to
+# otherwise we open a svg file to draw to
 if (is.null(plotFilename)) {
 	quartz(width=width,height=height)
 } else {
 	print(paste("drawing to",plotFilename))
-	pdf(file=plotFilename,width=width,height=height,pointsize=9)
+	svglite(file=plotFilename,width=width,height=height,pointsize=9)
 	turnDeviceOff = T
 	}
 
-title = paste("Primate T2T sex chromosome assemblies")
+title = paste("")
 
 alignment.border.color = "black"
 preExisting.color = "white"
 novel.color = "black"
-nonB.border.color = "#CC79A7"    # (reddish purple)
+nonB.border.color = "#FFC20A"    # (yellowish)
 nonB.background.color = "white"
 nonB.absent.color = "#E69F00"    # (orange)
 border.thickness = 2
@@ -96,8 +98,12 @@ for (chromIx in 1:length(chromToLength))
 	chromName = names(chromToLength)[chromIx]
 	bars[2*chromIx-1] = chromToLength[chromIx]
 	bars[2*chromIx  ] = chromToLength[chromIx]
-	names(bars)[2*chromIx-1] = paste(chromToPlotLabel[chromName]," novel",sep="")
-	names(bars)[2*chromIx  ] = non_B_DNA_Type
+	names(bars)[2*chromIx-1] = paste(chromToPlotLabel[chromName], sep="")
+        if (non_B_DNA_Type == "all") {
+	  names(bars)[2*chromIx  ] = "All non-B DNA Density"
+        } else {
+	  names(bars)[2*chromIx  ] = paste(non_B_DNA_Type, "non-B DNA Density")
+        }
 	barSpacing[2*chromIx-1] = 1.0
 	barSpacing[2*chromIx  ] = barSeparation
 	fillColor[2*chromIx-1] = nonB.background.color
@@ -118,9 +124,10 @@ par(mar=c(8,16,6,4)+0.1)    # BLTR
 # coordinate of the center of each bar
 # plot "empty" bars
 par(lwd=border.thickness)  # thickens borders
-barPos = barplot(rev(bars),horiz=T,xlim=c(0,maxLength*(1+horizontal.extra)),space=barSpacing,
-                 col=fillColor,border=borderColor,las=2,
-                 main=title)
+barPos = barplot(rev(bars), horiz=T, space=barSpacing,
+                 col=fillColor, border=borderColor, las=2,
+                 main=title, axes=FALSE)
+axis(side=3, at=c(0, 50000000, 100000000, 150000000), labels=c(0, 50000000, 100000000, 150000000))
 
 # fill alignment bars
 for (chromIx in 1:length(chromToLength))

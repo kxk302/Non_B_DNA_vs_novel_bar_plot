@@ -84,5 +84,5 @@ Forth argument: plotFilenameTemplate = NULL: will plot using quartz (Only works 
 Fifth argument: non_B_DNA_Type. Allowed values: GQ MR STR APR IR DR Z.
 Sixth argument: non_B_DNA_Folder. E.g., './non_b/STR' for STR non-B DNA type
 
-6. In the 'scripts' folder, there is a shell script that call the R script for all non-B DNA types and generates their bar plot in 'plots' folder
+6. In the 'scripts' folder, there is a shell script, horizontal_bar_plot.sh, that call the R script for all non-B DNA types and generates their bar plot in 'plots' folder
 
