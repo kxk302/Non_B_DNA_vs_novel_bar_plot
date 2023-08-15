@@ -56,8 +56,8 @@ if (!is.null(plotFilenameTemplate))
 	plotFilename = plotFilenameTemplate
 
 # width and height set the size of the drawing window
-width  = 10
-height = 10
+width  = 12
+height = 12
 turnDeviceOff = F
 
 if (useSubsetOfSpecies) height = height*(8/12)*(57/61) # 57/61 is a fudge factor
@@ -117,7 +117,7 @@ for (chromIx in 1:length(chromToLength))
 # par(mar=...) determines what portion of the plot window is reserved for margins
 # BLTR means bottom left top right
 options(scipen=10)
-par(mar=c(8,16,6,4)+0.1)    # BLTR
+par(mar=c(8,16,6,10)+0.1)    # BLTR
 
 # this call to barplot establishes the coordinate system in the plot area
 # and it draws bars, axes, and labels; barPos is a vector that gives the y
@@ -126,8 +126,9 @@ par(mar=c(8,16,6,4)+0.1)    # BLTR
 par(lwd=border.thickness)  # thickens borders
 barPos = barplot(rev(bars), horiz=T, space=barSpacing,
                  col=fillColor, border=borderColor, las=2,
-                 main=title, axes=FALSE)
-axis(side=3, at=c(0, 50000000, 100000000, 150000000), labels=c(0, 50000000, 100000000, 150000000))
+                 main=title, axes=FALSE, xlim=c(0, 200000000))
+axis(side=3, at=c(0, 50000000, 100000000, 150000000, 200000000), labels=c(0, 50000000, 100000000, 150000000, 200000000))
+axis(side=4, at=c(2.5, 5.5, 9, 12, 15.5, 18.5, 22, 25.5, 29, 31.5, 35, 38.5, 42, 45), labels=c("Siamang", "S. Orangutan", "B. Orangutan", "Gorilla", "Human", "Chimpanzee", "Bonobo", "Siamang", "S. Orangutan", "B. Orangutan", "Gorilla", "Human", "Chimpanzee", "Bonobo"), las=2)
 
 # fill alignment bars
 for (chromIx in 1:length(chromToLength))
@@ -213,7 +214,7 @@ for (chromIx in 1:length(chromToLength))
 	}
 
 par(lwd=border.thickness) # thickens borders
-legend("bottomright",bg="white",cex=1.0,legText,fill=legColor,border=legBorderColor)
+legend("bottom",bg="white",cex=1.0,legText,fill=legColor,border=legBorderColor)
 
 # this is necessary to close the file if we are drawing to a file
 if (turnDeviceOff) dev.off()
