@@ -1,14 +1,14 @@
-mPanPan1.chrX 160249396
-mPanTro3.chrX 153892427
-chm13.chrX    154259566
-mGorGor1.chrX 177553137
-mPonPyg2.chrX 161100531
-mPonAbe1.chrX 162586350
-mSymSyn1.chrX 165588543
-mPanPan1.chrY 46925665
-mPanTro3.chrY 36445859
-hg002.chrY    62460029
-mGorGor1.chrY 65269191
-mPonPyg2.chrY 49349692
-mPonAbe1.chrY 67808326
-mSymSyn1.chrY 29919963
+mPanPan1.chrX 160249396 " Bonobo X"
+mPanTro3.chrX 153892427 " Chimpanzee X"
+chm13.chrX    154259566 " Human X"
+mGorGor1.chrX 177553137 " Gorilla X"
+mPonPyg2.chrX 161100531 " B. Orangutan X"
+mPonAbe1.chrX 162586350 " S. Orangutan X"
+mSymSyn1.chrX 165588543 " Siamang X"
+mPanPan1.chrY 46925665  " Bonobo Y"
+mPanTro3.chrY 36445859  " Chimpanzee Y"
+hg002.chrY    62460029  " Human Y"
+mGorGor1.chrY 65269191  " Gorilla Y"
+mPonPyg2.chrY 49349692  " B. Orangutan Y"
+mPonAbe1.chrY 67808326  " S. Orangutan Y"
+mSymSyn1.chrY 29919963  " Siamang Y"

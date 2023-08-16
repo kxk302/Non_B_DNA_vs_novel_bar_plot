@@ -42,6 +42,7 @@ lengthsFilename = "data/dip.20221111.lengths"
 if (useSubsetOfSpecies) lengthsFilename = "data/subset.lengths"
 chromLengths = read.table(lengthsFilename,header=F,colClasses=c("character","integer"))
 chromToLength = chromLengths[,2]
+speciesList = chromLengths[,3]
 names(chromToLength) <- chromLengths[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 maxLength = max(chromToLength)
@@ -56,8 +57,8 @@ if (!is.null(plotFilenameTemplate))
 	plotFilename = plotFilenameTemplate
 
 # width and height set the size of the drawing window
-width  = 12
-height = 12
+width  = 13
+height = 13
 turnDeviceOff = F
 
 if (useSubsetOfSpecies) height = height*(8/12)*(57/61) # 57/61 is a fudge factor
@@ -99,11 +100,7 @@ for (chromIx in 1:length(chromToLength))
 	bars[2*chromIx-1] = chromToLength[chromIx]
 	bars[2*chromIx  ] = chromToLength[chromIx]
 	names(bars)[2*chromIx-1] = paste(chromToPlotLabel[chromName], sep="")
-        if (non_B_DNA_Type == "all") {
-	  names(bars)[2*chromIx  ] = "All non-B DNA Density"
-        } else {
-	  names(bars)[2*chromIx  ] = paste(non_B_DNA_Type, "non-B DNA Density")
-        }
+	names(bars)[2*chromIx  ] = "Non-B DNA"
 	barSpacing[2*chromIx-1] = 1.0
 	barSpacing[2*chromIx  ] = barSeparation
 	fillColor[2*chromIx-1] = nonB.background.color
@@ -128,7 +125,6 @@ barPos = barplot(rev(bars), horiz=T, space=barSpacing,
                  col=fillColor, border=borderColor, las=2,
                  main=title, axes=FALSE, xlim=c(0, 200000000))
 axis(side=3, at=c(0, 50000000, 100000000, 150000000, 200000000), labels=c(0, 50000000, 100000000, 150000000, 200000000))
-axis(side=4, at=c(2.5, 5.5, 9, 12, 15.5, 18.5, 22, 25.5, 29, 31.5, 35, 38.5, 42, 45), labels=c("Siamang", "S. Orangutan", "B. Orangutan", "Gorilla", "Human", "Chimpanzee", "Bonobo", "Siamang", "S. Orangutan", "B. Orangutan", "Gorilla", "Human", "Chimpanzee", "Bonobo"), las=2)
 
 # fill alignment bars
 for (chromIx in 1:length(chromToLength))
@@ -137,11 +133,12 @@ for (chromIx in 1:length(chromToLength))
 	# them from the top down
 	flipIx = length(chromToLength)+1-chromIx
 	yPos = barPos[2*flipIx]
+	yPosText = barPos[2*flipIx-1]
 	chromLen = chromToLength[chromIx]
 	chromName = names(chromToLength)[chromIx]
 
-	chromLenStr = paste(" ",round(chromLen/(1*1000*1000)),"Mbp",sep="")
-	text(chromLen,yPos,chromLenStr,adj=c(0,0.5),cex=.8)
+	chromLenStr = paste(" (",round(chromLen/(1*1000*1000)),"Mb)",sep="")
+	text(chromLen,yPosText,chromLenStr,adj=c(0,0.5),cex=.8)
 
 	if (chromName %in% c("chm13.chrX","hg002.chrY")) {
 		rect(0,yPos-0.5,chromLen,yPos+0.5,col=preExisting.color,border=NA)    # LBRT
@@ -175,8 +172,12 @@ for (chromIx in 1:length(chromToLength))
 	{
 	flipIx = length(chromToLength)+1-chromIx
 	yPos = barPos[2*flipIx-1]
+	yPosText = barPos[2*flipIx]
 	chromLen = chromToLength[chromIx]
 	chromName = names(chromToLength)[chromIx]
+        species = speciesList[chromIx]
+
+	text(chromLen,yPosText,species,adj=c(0,0.5),cex=.8)
 
 	if (!chromName %in% names(chromToDensity))
 		{
@@ -214,7 +215,7 @@ for (chromIx in 1:length(chromToLength))
 	}
 
 par(lwd=border.thickness) # thickens borders
-legend("bottom",bg="white",cex=1.0,legText,fill=legColor,border=legBorderColor)
+legend("bottomright",bg="white",cex=1.0,legText,fill=legColor,border=legBorderColor)
 
 # this is necessary to close the file if we are drawing to a file
 if (turnDeviceOff) dev.off()
