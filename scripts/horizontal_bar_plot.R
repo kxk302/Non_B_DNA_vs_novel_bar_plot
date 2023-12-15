@@ -2,8 +2,8 @@
 args = commandArgs(trailingOnly=TRUE)
 
 # test if there is at least one argument: if not, return an error
-if (length(args) < 6) {
-  stop("Specify inhibitAlignmentFill, inhibitDensityFill, useSubsetOfSpecies, plotFilenameTemplate, non-B DNA type, and non-B DNA folder", call.=FALSE)
+if (length(args) < 9) {
+  stop("Specify inhibitAlignmentFill, inhibitDensityFill, useSubsetOfSpecies, plotFilenameTemplate, non-B DNA type, non-B DNA folder, dip.lengths file, chrom_to_density file, and chrom_to_plot_label file", call.=FALSE)
 } 
 
 library(svglite)
@@ -25,7 +25,10 @@ non_B_DNA_Type = args[5]
 
 non_B_DNA_Folder = args[6]
 
-# path.nonB = gsub("whats_new.20230429A","non_b_dna.20230503C",getwd())
+dip_lengths_file = args[7]
+chrom_to_density_file = args[8]
+chrom_to_plot_label_file = args[9]
+
 path.nonB = file.path(getwd(), non_B_DNA_Folder)
 
 chromToAlignmentXXX = read.table("data/chrom_to_alignment.dat",header=F,comment.ch="",colClasses=c("character","character"))
@@ -33,12 +36,12 @@ chromToAlignment = chromToAlignmentXXX[,2]
 names(chromToAlignment) <- chromToAlignmentXXX[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 
-chromToDensityXXX = read.table("data/chrom_to_density.dat",header=F,comment.ch="",colClasses=c("character","character"))
+chromToDensityXXX = read.table(paste("data/", chrom_to_density_file, sep=""),header=F,comment.ch="",colClasses=c("character","character"))
 chromToDensity = chromToDensityXXX[,2]
 names(chromToDensity) <- chromToDensityXXX[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 
-lengthsFilename = "data/dip.20221111.lengths"
+lengthsFilename = paste("data/", dip_lengths_file, sep="")
 if (useSubsetOfSpecies) lengthsFilename = "data/subset.lengths"
 chromLengths = read.table(lengthsFilename,header=F,colClasses=c("character","integer"))
 chromToLength = chromLengths[,2]
@@ -47,7 +50,7 @@ names(chromToLength) <- chromLengths[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
 maxLength = max(chromToLength)
 
-chromToPlotLabelXXX = read.table("data/chrom_to_plot_label.dat",header=F,comment.ch="",colClasses=c("character","character"))
+chromToPlotLabelXXX = read.table(paste("data/", chrom_to_plot_label_file, sep=""),header=F,comment.ch="",colClasses=c("character","character"))
 chromToPlotLabel = chromToPlotLabelXXX[,2]
 names(chromToPlotLabel) <- chromToPlotLabelXXX[,1]
 # ↑↑↑ setting names of a vector object allows us to index the vector by names ↑↑↑
@@ -123,8 +126,8 @@ par(mar=c(8,16,6,10)+0.1)    # BLTR
 par(lwd=border.thickness)  # thickens borders
 barPos = barplot(rev(bars), horiz=T, space=barSpacing,
                  col=fillColor, border=borderColor, las=2,
-                 main=title, axes=FALSE, xlim=c(0, 200000000))
-axis(side=3, at=c(0, 50000000, 100000000, 150000000, 200000000), labels=c(0, 50000000, 100000000, 150000000, 200000000))
+                 main=title, axes=FALSE, xlim=c(0, 300000000))
+axis(side=3, at=c(0, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000), labels=c(0, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000))
 
 # fill alignment bars
 for (chromIx in 1:length(chromToLength))
