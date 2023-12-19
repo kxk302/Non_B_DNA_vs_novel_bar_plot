@@ -190,6 +190,7 @@ for (chromIx in 1:length(chromToLength))
 		}
 
         densityFilename = paste(path.nonB,"/data/",chromToDensity[chromName],"_",non_B_DNA_Type,"_density_final.bed",sep="")
+        print(paste("densityFilename: ", densityFilename))
 	if (!file.exists(densityFilename))
 		{
 		rect(0,yPos-0.5,chromLen,yPos+0.5,col=nonB.absent.color,border=NA)   # LBRT
@@ -201,7 +202,16 @@ for (chromIx in 1:length(chromToLength))
 		next
 
 	densityWindows = read.table(densityFilename,header=T,comment.ch="",colClasses=c("character","integer","integer","numeric"))
+        # Skip the file is it only has a header and not data
+        print(paste("nrow(densityWindows): ", nrow(densityWindows)))
+        if ( nrow(densityWindows) == 0 ) {
+                print("Density file has no data!")
+                print(nrow(densityWindows))
+                next
+        }
+
         maxDensity = max(densityWindows[,4])
+        print(paste("maxDensity: ", maxDensity))
 
 	print(paste("filling nonB",chromName,", ",nrow(densityWindows)," intervals",sep=""))
 	for (ix in 1:nrow(densityWindows))
